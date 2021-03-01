@@ -1,6 +1,5 @@
-<script>
-new Vue({
-    el: '#content',
+let obj = {
+    el: '#app',
     data: () => {
         return {
             visible: false,
@@ -29,9 +28,9 @@ new Vue({
                 .then(() => {
                     // always executed
                 }).finally(() => {
-                    this.loading = false;
-                });
+                this.loading = false;
+            });
         },
     },
-})
-</script>
+};
+

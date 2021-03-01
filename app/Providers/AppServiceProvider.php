@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        View::addExtension('js', 'blade');
         View::addExtension('vue', 'blade');
     }
 
