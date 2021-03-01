@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+// TODO: 必须设置 vue, 用作视图渲染和权限管理
+//Route::middleware(['auth'])->prefix('/admin')->group(function () {
+Route::middleware([])->prefix('/admin')->group(function () {
+    Route::get('/vue', [VueController::class, 'index'])->name('admin.vue.index');
 });
