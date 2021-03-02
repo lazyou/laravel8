@@ -19,10 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// TODO: 必须设置 vue, 用作视图渲染和权限管理
+// TODO: 视图路由必须设置 name, 用作视图渲染和权限管理
 
 Route::get('/admin/auth/login', [AuthController::class, 'login'])->name('admin.auth.login');
-Route::post('/admin/auth/login', [AuthController::class, 'loginPost'])->name('admin.auth.login');
+Route::post('/admin/auth/login', [AuthController::class, 'loginPost']);
+Route::get('/admin/auth/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/vue', [VueController::class, 'index'])->name('admin.vue.index');

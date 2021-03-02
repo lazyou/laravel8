@@ -47,11 +47,14 @@
                 <el-header style="text-align: right; font-size: 12px; background-color: #B3C0D1; color: #333; line-height: 60px;">
                     <el-dropdown>
                       <span class="el-dropdown-link">
-                        下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
+                          {{ $_auth->name }}
+                          <i class="el-icon-arrow-down el-icon--right"></i>
                       </span>
-                        <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-menu slot="dropdown">
+                        <el-link href="/admin/auth/logout">
                             <el-dropdown-item>注销</el-dropdown-item>
-                        </el-dropdown-menu>
+                        </el-link>
+                    </el-dropdown-menu>
                     </el-dropdown>
                 </el-header>
 

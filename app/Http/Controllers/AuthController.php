@@ -12,7 +12,7 @@ class AuthController extends Controller
     {
         // $this->createAdminUser();
         if (Auth::check()) {
-            return redirect($this->home);
+            return redirect($this->urlHome);
         }
 
         return $this->view();
@@ -44,9 +44,16 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return $this->apiData(['url' => $this->home]);
+            return $this->apiData(['url' => $this->urlHome]);
         } else {
             return $this->apiBad('账号或密码错误');
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return redirect($this->urlLogin);
     }
 }

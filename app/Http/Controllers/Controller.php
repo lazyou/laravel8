@@ -19,19 +19,22 @@ class Controller extends BaseController
     protected $auth;
 
     // 登录默认跳转位置
-    protected $home = '/admin/vue';
+    protected $urlHome = '/admin/vue';
+    protected $urlLogin = '/admin/auth/login';
 
     // 视图数据
     protected array $_data = [
         '_head' => [
             'title' => '后台管理',
         ],
+        '_auth' => null,
     ];
 
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
             $this->auth = Auth::user();
+            $this->_data['_auth'] = $this->auth;
             return $next($request);
         });
     }
