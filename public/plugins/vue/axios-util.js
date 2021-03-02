@@ -1,4 +1,13 @@
 // vue 专用的工具封装
+// let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+function showError(message) {
+    ElementUI.Message({
+        message: message,
+        type: 'error',
+        duration: 5 * 1000
+    });
+}
 
 // response interceptor
 axios.interceptors.response.use(
@@ -9,20 +18,12 @@ axios.interceptors.response.use(
         const res = response.data;
 
         if (response.status === 200 && response.data && response.data.message) {
-            ElementUI.Message({
-                message: response.data.message,
-                type: 'success',
-                duration: 5 * 1000
-            });
+            showError(response.data.message);
         }
 
         // 根据 http 状态码来判定接口情况
         if (response.status > 204) {
-            ElementUI.Message({
-                message: res.message || 'Error',
-                type: 'error',
-                duration: 5 * 1000
-            });
+            showError(res.message);
 
             return Promise.reject(new Error(res.message || 'Error'));
         } else {
@@ -32,26 +33,27 @@ axios.interceptors.response.use(
     error => {
         // debug 时打开
         // console.log('http.js response error:');
-        // console.log(error); // TODO: 打印出来不是一个对象, 太坑了...
         // console.log(error.response); // TODO: 只有这样才能访问到 400 错误响应的数据
 
-        let message = error.message;
         const response = error.response;
 
-        if (response.status === 401) {
-            window.location.reload();
+        // TODO: 其他错误码
+        if (response.status === 400) {
+            let message = response.data.message || response.statusText;
+            showError(message);
             return Promise.reject(error);
         }
 
-        if (response.status >= 400 && response.data) {
-            message = response.data.message;
-        }
+        if (response.status === 401) {
+            let loginURL = '/admin/auth/login';
+            if (window.location.pathname !== loginURL) {
+                window.location.href = loginURL;
+            } else {
+                showError('请先登录');
+            }
 
-        ElementUI.Message({
-            message: message,
-            type: 'error',
-            duration: 5 * 1000
-        });
+            return Promise.reject(error);
+        }
 
         return Promise.reject(error);
     }

@@ -10,12 +10,16 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\MessageBag;
+use Symfony\Component\HttpFoundation\Response;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     protected $auth;
+
+    // 登录默认跳转位置
+    protected $home = '/admin/vue';
 
     // 视图数据
     protected array $_data = [
@@ -56,7 +60,7 @@ class Controller extends BaseController
      * @param int $code
      * @return JsonResponse
      */
-    protected function apiFail($message = '操作失败', $code = 400): JsonResponse
+    protected function apiBad($message = '操作失败', $code = Response::HTTP_BAD_REQUEST): JsonResponse
     {
         return response()->json([
             'message' => $message,
@@ -64,21 +68,32 @@ class Controller extends BaseController
     }
 
     /**
-     * 接口成功统一响应
+     * 接口操作成功统一响应
      * @param string $message
      * @param int $code
      * @return JsonResponse
      */
-    protected function apiSuccess($message = '操作成功', $code = 200): JsonResponse
+    protected function apiOk($message = '操作成功', $code = Response::HTTP_OK): JsonResponse
     {
         return response()->json([
             'message' => $message,
         ], $code);
     }
 
+    /**
+     * 接口数据响应
+     * @param array $data
+     * @param int $code
+     * @return JsonResponse
+     */
+    protected function apiData($data = [], $code = Response::HTTP_OK): JsonResponse
+    {
+        return response()->json($data, $code);
+    }
+
     // 接口单条表单验证错误响应
     protected function validateError($key, $errMsg)
     {
-        return response(['errors' => new MessageBag([$key => $errMsg])], 422);
+        return response(['errors' => new MessageBag([$key => $errMsg])], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }

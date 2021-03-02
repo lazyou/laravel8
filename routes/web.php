@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VueController;
 
 /*
@@ -19,7 +20,10 @@ Route::get('/', function () {
 });
 
 // TODO: 必须设置 vue, 用作视图渲染和权限管理
-//Route::middleware(['auth'])->prefix('/admin')->group(function () {
-Route::middleware([])->prefix('/admin')->group(function () {
+
+Route::get('/admin/auth/login', [AuthController::class, 'login'])->name('admin.auth.login');
+Route::post('/admin/auth/login', [AuthController::class, 'loginPost'])->name('admin.auth.login');
+
+Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/vue', [VueController::class, 'index'])->name('admin.vue.index');
 });
