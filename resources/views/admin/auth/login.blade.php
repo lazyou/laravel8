@@ -12,7 +12,7 @@
         <el-form-item prop="captcha">
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-input type="text" placeholder="请输入验证码" v-model="form.captcha"></el-input>
+                    <el-input type="text" placeholder="请输入验证码" v-model="form.captcha" @keyup.enter.native="onSubmit('loginForm')"></el-input>
                 </el-col>
                 <el-col :span="12">
                     <img :src="captchaSrc" @click="changeCaptcha" alt="点击图片重新获取验证码" style="border-radius: 4px;">
@@ -20,7 +20,7 @@
             </el-row>
         </el-form-item>
         <el-form-item style="width:100%; padding-top: 10px;">
-            <el-button type="primary" style="width:100%;" @click="onSubmit('loginForm')">登录</el-button>
+            <el-button type="primary" @click="onSubmit('loginForm')" style="width:100%;">登录</el-button>
         </el-form-item>
     </el-form>
 @endsection
