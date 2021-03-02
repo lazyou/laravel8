@@ -14,7 +14,7 @@ let obj = {
         getList() {
             this.loading = true;
 
-            axios.get('/admin/vue')
+            axios.get('/admin/vue?t=1')
                 .then((response) => {
                     // handle success
                     console.log(response);
