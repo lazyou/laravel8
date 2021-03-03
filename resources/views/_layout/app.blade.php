@@ -18,60 +18,59 @@
         @stack('css')
     </head>
 
-    <div id="app">
-        <el-container>
-            <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
-                <el-menu :default-openeds="['1', '2']">
-                    <el-submenu index="1">
-                        <template slot="title"><i class="el-icon-message"></i>导航一</template>
-                        <el-link href="/admin/vue">
-                            <el-menu-item index="1-1">vue</el-menu-item>
-                        </el-link>
-                        <el-link href="/admin/test">
-                            <el-menu-item index="1-2">test</el-menu-item>
-                        </el-link>
-                    </el-submenu>
-                    <el-submenu index="2">
-                        <template slot="title"><i class="el-icon-message"></i>导航二</template>
-                        <el-link href="/admin/vue">
-                            <el-menu-item index="2-1">vue</el-menu-item>
-                        </el-link>
-                        <el-link href="/admin/test">
-                            <el-menu-item index="2-2">test</el-menu-item>
-                        </el-link>
-                    </el-submenu>
-                </el-menu>
-            </el-aside>
-
+    <body>
+        <div id="app">
             <el-container>
-                <el-header style="text-align: right; font-size: 12px; background-color: #B3C0D1; color: #333; line-height: 60px;">
-                    <el-dropdown>
-                      <span class="el-dropdown-link">
-                          {{ $_auth->name }}
-                          <i class="el-icon-arrow-down el-icon--right"></i>
-                      </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-link href="/admin/auth/logout">
-                            <el-dropdown-item>注销</el-dropdown-item>
-                        </el-link>
-                    </el-dropdown-menu>
-                    </el-dropdown>
-                </el-header>
+                <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
+                    <el-menu :default-openeds="['1', '2']">
+                        <el-submenu index="1">
+                            <template slot="title"><i class="el-icon-message"></i>导航一</template>
+                            <el-link href="/admin/vue">
+                                <el-menu-item index="1-1">vue</el-menu-item>
+                            </el-link>
+                            <el-link href="/admin/test">
+                                <el-menu-item index="1-2">test</el-menu-item>
+                            </el-link>
+                        </el-submenu>
+                        <el-submenu index="2">
+                            <template slot="title"><i class="el-icon-message"></i>导航二</template>
+                            <el-link href="/admin/vue">
+                                <el-menu-item index="2-1">vue</el-menu-item>
+                            </el-link>
+                            <el-link href="/admin/test">
+                                <el-menu-item index="2-2">test</el-menu-item>
+                            </el-link>
+                        </el-submenu>
+                    </el-menu>
+                </el-aside>
 
-                <el-main>
-                    @yield('content')
-                </el-main>
+                <el-container>
+                    <el-header style="text-align: right; font-size: 12px; background-color: #B3C0D1; color: #333; line-height: 60px;">
+                        <el-dropdown>
+                          <span class="el-dropdown-link">
+                              {{ $_auth->name }}
+                              <i class="el-icon-arrow-down el-icon--right"></i>
+                          </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-link href="/admin/auth/logout">
+                                <el-dropdown-item>注销</el-dropdown-item>
+                            </el-link>
+                        </el-dropdown-menu>
+                        </el-dropdown>
+                    </el-header>
+
+                    <el-main>
+                        @yield('content')
+                    </el-main>
+                </el-container>
             </el-container>
-        </el-container>
-    </div>
+        </div>
 
-    <script>
-        @yield('content-vue')
-
-        new Vue(
-            obj
-        );
-    </script>
+        <script>
+            @yield('content-vue')
+            new Vue(obj);
+        </script>
 
     @stack('js')
+    </body>
 </html>

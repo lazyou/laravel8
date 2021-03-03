@@ -12,17 +12,16 @@
         @stack('css')
     </head>
 
-    <div id="app">
-        @yield('content')
-    </div>
+    <body>
+        <div id="app">
+            @yield('content')
+        </div>
 
-    <script>
-        @yield('content-vue')
+        <script>
+            @yield('content-vue')
+            new Vue(obj);
+        </script>
 
-        new Vue(
-            obj
-        );
-    </script>
-
-    @stack('js')
+        @stack('js')
+    </body>
 </html>
