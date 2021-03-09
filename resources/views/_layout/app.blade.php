@@ -23,24 +23,14 @@
             <el-container>
                 <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
                     <el-menu :default-openeds="['1', '2']">
-                        <el-submenu index="1">
-                            <template slot="title"><i class="el-icon-message"></i>导航一</template>
-                            <el-link href="/admin/vue">
-                                <el-menu-item index="1-1">vue</el-menu-item>
-                            </el-link>
-                            <el-link href="/admin/test">
-                                <el-menu-item index="1-2">test</el-menu-item>
-                            </el-link>
-                        </el-submenu>
-                        <el-submenu index="2">
-                            <template slot="title"><i class="el-icon-message"></i>导航二</template>
-                            <el-link href="/admin/vue">
-                                <el-menu-item index="2-1">vue</el-menu-item>
-                            </el-link>
-                            <el-link href="/admin/test">
-                                <el-menu-item index="2-2">test</el-menu-item>
-                            </el-link>
-                        </el-submenu>
+                        @foreach($_menus as $key => $menu)
+                        <a href="{{ $menu['url'] }}">
+                            <el-menu-item index="{{ $key }}">
+                                <i class="{{ $menu['icon'] }}"></i>
+                                <span slot="title">{{ $menu['name'] }}</span>
+                            </el-menu-item>
+                        </a>
+                        @endforeach
                     </el-menu>
                 </el-aside>
 
@@ -65,6 +55,12 @@
                 </el-container>
             </el-container>
         </div>
+
+        <style>
+            .el-menu a {
+                text-decoration: unset;
+            }
+        </style>
 
         <script>
             @yield('content-vue')

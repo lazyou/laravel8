@@ -28,6 +28,7 @@ class Controller extends BaseController
             'title' => '后台管理',
         ],
         '_auth' => null,
+        '_menus' => [],
     ];
 
     public function __construct()
@@ -35,6 +36,7 @@ class Controller extends BaseController
         $this->middleware(function ($request, $next) {
             $this->auth = Auth::user();
             $this->_data['_auth'] = $this->auth;
+            $this->_data['_menus'] = $this->getMenus();
             return $next($request);
         });
     }
@@ -98,5 +100,46 @@ class Controller extends BaseController
     protected function validateError($key, $errMsg)
     {
         return response(['errors' => new MessageBag([$key => $errMsg])], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    protected function getMenus(): array
+    {
+        return [
+            [
+                'name' => '首页',
+                'url' => '/admin/home',
+                'icon' => 'el-icon-s-data',
+            ],
+            [
+                'name' => '店铺管理',
+                'url' => '/admin/shop',
+                'icon' => 'el-icon-s-shop',
+            ],
+            [
+                'name' => '仓库管理',
+                'url' => '/admin/warehouse',
+                'icon' => 'el-icon-house',
+            ],
+            [
+                'name' => '系统产品',
+                'url' => '/admin/product',
+                'icon' => 'el-icon-goods',
+            ],
+            [
+                'name' => '采购产品',
+                'url' => '/admin/purchase',
+                'icon' => 'el-icon-shopping-cart-full',
+            ],
+            [
+                'name' => '店铺产品',
+                'url' => '/admin/shop_product',
+                'icon' => '',
+            ],
+            [
+                'name' => '店铺订单',
+                'url' => '/admin/shop_order',
+                'icon' => '',
+            ],
+        ];
     }
 }
