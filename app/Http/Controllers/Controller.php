@@ -29,6 +29,7 @@ class Controller extends BaseController
         ],
         '_auth' => null,
         '_menus' => [],
+        '_menu_active' => '',
     ];
 
     public function __construct()
@@ -37,6 +38,7 @@ class Controller extends BaseController
             $this->auth = Auth::user();
             $this->_data['_auth'] = $this->auth;
             $this->_data['_menus'] = $this->getMenus();
+            $this->_data['_menu_active'] = $this->getActiveMenu();
             return $next($request);
         });
     }
@@ -100,6 +102,11 @@ class Controller extends BaseController
     protected function validateError($key, $errMsg)
     {
         return response(['errors' => new MessageBag([$key => $errMsg])], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    protected function getActiveMenu(): string
+    {
+        return '/' . request()->path();
     }
 
     protected function getMenus(): array

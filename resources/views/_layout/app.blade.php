@@ -22,14 +22,14 @@
         <div id="app">
             <el-container>
                 <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
-                    <el-menu :default-openeds="['1', '2']">
+                    <el-menu default-active="{{ $_menu_active }}">
                         @foreach($_menus as $key => $menu)
-                        <a href="{{ $menu['url'] }}">
-                            <el-menu-item index="{{ $key }}">
-                                <i class="{{ $menu['icon'] }}"></i>
-                                <span slot="title">{{ $menu['name'] }}</span>
-                            </el-menu-item>
-                        </a>
+                            <a href="{{ $menu['url'] }}">
+                                <el-menu-item index="{{ $menu['url'] }}">
+                                    <i class="{{ $menu['icon'] }}"></i>
+                                    <span slot="title">{{ $menu['name'] }}</span>
+                                </el-menu-item>
+                            </a>
                         @endforeach
                     </el-menu>
                 </el-aside>
