@@ -46,7 +46,7 @@
             <el-container>
                 <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
                     <el-menu default-active="{{ $_menu_active }}">
-                        <el-menu-item index="0" disabled style="color: #303133;">
+                        <el-menu-item index="0" disabled style="text-align: center; font-size: 28px; line-height: 52px;">
 {{--                            <i class="{{ $menu['icon'] }}"></i>--}}
                             <span slot="title" >
                                 <strong>Easy ERP</strong>
@@ -64,7 +64,7 @@
                 </el-aside>
 
                 <el-container>
-                    <el-header>
+                    <el-header style="height: 56px;">
                         <el-dropdown>
                           <span class="el-dropdown-link">
                               {{ $_auth->name }}
