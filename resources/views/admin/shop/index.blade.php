@@ -4,6 +4,9 @@
     {{-- 标准单页面CURD参考 --}}
     <div id="action">
         <el-button @click="editClick" type="primary" size="medium">添加店铺</el-button>
+
+        <el-input v-model="params.name" @keyup.enter.native="getShopList" clearable placeholder="名字" size="medium" style="width: 180px;"></el-input>
+        <el-button @click="getShopList" icon="el-icon-search" type="primary" size="medium"></el-button>
     </div>
 
     <div id="dialog">

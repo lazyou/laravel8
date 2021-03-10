@@ -16,7 +16,6 @@ let obj = {
                 page: 1,
                 limit: 20,
                 name: null,
-                login_status: null,
             },
         }
     },

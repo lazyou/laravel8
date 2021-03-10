@@ -133,19 +133,19 @@ class Controller extends BaseController
                 'icon' => 'el-icon-goods',
             ],
             [
-                'name' => '采购产品',
+                'name' => '采购物流',
                 'url' => '/admin/purchase',
                 'icon' => 'el-icon-shopping-cart-full',
             ],
             [
                 'name' => '店铺产品',
                 'url' => '/admin/shop_product',
-                'icon' => '',
+                'icon' => 'el-icon-question',
             ],
             [
                 'name' => '店铺订单',
                 'url' => '/admin/shop_order',
-                'icon' => '',
+                'icon' => 'el-icon-question',
             ],
         ];
     }
