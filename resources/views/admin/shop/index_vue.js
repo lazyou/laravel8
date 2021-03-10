@@ -34,7 +34,6 @@ let obj = {
         },
         getShopOauthList() {
             this.main_loading = true;
-
             axios.get('/admin/shop/oauth').then((res) => {
                     this.shop_oauth_options = res;
                 }).finally(() => {
@@ -43,7 +42,6 @@ let obj = {
         },
         getShopList() {
             this.main_loading = true;
-
             axios.get('/admin/shop', { params: this.params })
                 .then((res) => {
                     this.list = res.data;
@@ -54,7 +52,6 @@ let obj = {
         },
         // 每页数量变化
         paginationChange() {
-            console.log(this.params);
             this.getShopList();
         },
     },

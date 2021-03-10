@@ -20,6 +20,14 @@
             .el-menu a {
                 text-decoration: unset;
             }
+            .el-header{
+                color: #333;
+                font-size: 12px;
+                text-align: right;
+                line-height: 60px;
+                background-color: #f7f8fa!important;
+                border-color: #f7f8fa!important;
+            }
             .el-main{
                 padding: 15px
             }
@@ -38,6 +46,12 @@
             <el-container>
                 <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
                     <el-menu default-active="{{ $_menu_active }}">
+                        <el-menu-item index="0" disabled style="color: #303133;">
+{{--                            <i class="{{ $menu['icon'] }}"></i>--}}
+                            <span slot="title" >
+                                <strong>Easy ERP</strong>
+                            </span>
+                        </el-menu-item>
                         @foreach($_menus as $key => $menu)
                             <a href="{{ $menu['url'] }}">
                                 <el-menu-item index="{{ $menu['url'] }}">
@@ -50,8 +64,7 @@
                 </el-aside>
 
                 <el-container>
-                    <el-header style="text-align: right; font-size: 12px; background-color: #f7f8fa!important;
-    border-color: #f7f8fa!important; color: #333; line-height: 60px;">
+                    <el-header>
                         <el-dropdown>
                           <span class="el-dropdown-link">
                               {{ $_auth->name }}
