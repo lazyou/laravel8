@@ -10,6 +10,11 @@ class Base extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
     // 是否允许
     const ALLOW_NO = 1;
     const ALLOW_YES = 2;

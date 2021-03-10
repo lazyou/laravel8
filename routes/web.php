@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VueController;
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\ShopProductController;
+use App\Http\Controllers\ShopOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +33,18 @@ Route::get('/admin/auth/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/vue', [VueController::class, 'index'])->name('admin.vue.index');
+
+    // 店铺管理
+    Route::get('/shop', [ShopController::class, 'index'])->name('admin.shop.index');
+    Route::get('/shop/oauth', [ShopController::class, 'oauth']);
+
+    Route::get('/warehouse', [WarehouseController::class, 'index'])->name('admin.warehouse.index');
+
+    Route::get('/product', [ProductController::class, 'index'])->name('admin.product.index');
+
+    Route::get('/purchase', [PurchaseController::class, 'index'])->name('admin.purchase.index');
+
+    Route::get('/shop_product', [ShopProductController::class, 'index'])->name('admin.shop_product.index');
+
+    Route::get('/shop_order', [ShopOrderController::class, 'index'])->name('admin.shop_order.index');
 });

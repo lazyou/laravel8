@@ -15,11 +15,26 @@
         <script src="{{ asset('plugins/vue/element-ui-2.14.0.js') }}"></script>
         <script src="{{ asset('plugins/vue/axios-0.21.0.min.js') }}"></script>
         <script src="{{ asset('plugins/vue/axios-util.js') }}"></script>
+        <style>
+            {{-- element-ui css 重写, 通用 css --}}
+            .el-menu a {
+                text-decoration: unset;
+            }
+            .el-main{
+                padding: 15px
+            }
+            .pagination-container{
+                padding-top: 15px;
+            }
+            #action{
+                padding-bottom: 15px;
+            }
+        </style>
         @stack('css')
     </head>
 
     <body>
-        <div id="app">
+        <div id="app" v-loading="app_loading">
             <el-container>
                 <el-aside width="200px" style="background-color: rgb(238, 241, 246);">
                     <el-menu default-active="{{ $_menu_active }}">
@@ -35,7 +50,8 @@
                 </el-aside>
 
                 <el-container>
-                    <el-header style="text-align: right; font-size: 12px; background-color: #B3C0D1; color: #333; line-height: 60px;">
+                    <el-header style="text-align: right; font-size: 12px; background-color: #f7f8fa!important;
+    border-color: #f7f8fa!important; color: #333; line-height: 60px;">
                         <el-dropdown>
                           <span class="el-dropdown-link">
                               {{ $_auth->name }}
@@ -49,21 +65,40 @@
                         </el-dropdown>
                     </el-header>
 
-                    <el-main>
+                    <el-main v-loading="main_loading">
                         @yield('content')
                     </el-main>
                 </el-container>
             </el-container>
         </div>
 
-        <style>
-            .el-menu a {
-                text-decoration: unset;
-            }
-        </style>
+        {{-- vue 的组件 --}}
+        @yield('component-vue')
 
         <script>
+            // TODO: 如何添加全局的vue属性方法
+            let appEl = '#app';
+            let appData = {
+                app_loading: false,
+                main_loading: false,
+            };
             @yield('content-vue')
+            // let app = {
+            //     el: '#app',
+            //     data: () => {
+            //         return {
+            //             ...obj.data(),
+            //             mainLoading: false,
+            //         };
+            //     },
+            //     // // TODO: 以下行不通
+            //     // created() {
+            //     //     obj.created();
+            //     // },
+            //     methods: {
+            //         ...obj.methods,
+            //     },
+            // };
             new Vue(obj);
         </script>
 
