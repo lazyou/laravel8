@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
@@ -13,7 +14,12 @@ class WarehouseController extends Controller
             return $this->view();
         }
 
-        return [
+        $map = [
+            'id',
+            'name' => 'like',
+            'created_at' => 'between',
         ];
+
+        return vuePaginate(Warehouse::class, $map);
     }
 }
